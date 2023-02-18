@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--Student-->
+    <record id="school_management_kanban_view" model="ir.ui.view">
+        <field name="name">school.management.kanban.view</field>
+        <field name="model">school.management</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban" string="School Management">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="gender"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_content oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>
+                                        <field name="gender"/>
+                                        <field name="phone"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="school_management_form_view" model="ir.ui.view">
+        <field name="name">school.management.form.view</field>
+        <field name="model">school.management</field>
+        <field name="arch" type="xml">
+            <form string="School Management">
+                <header>
+                    <button class="btn-primary" name="action_draft" string="Draft" type="object"
+                            attrs="{'invisible': ['|', ('states','=','draft'), ('states','=','finish')]}"/>
+                    <!--                    <button class="btn-primary" name="action_cancellation" string="Cancel Admission" type="object"/>-->
+                    <button class="btn-primary" name="action_finish" string="Finish" type="object"
+                            attrs="{'invisible': [('states','=','finish')]}"/>
+                    <!--                    <button name="action_cancel" string="Cancel" type="object"/>-->
+                    <field name="states" widget="statusbar" statusbar_visible="draft,finish"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_invoices">
+                            <span class="o_stat_value" style="font-weight: 700;">
+                                <field name="total_invoice"/>
+                            </span>
+                            <span class="o_stat_text">Invoiced</span>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="mail"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="dateOfBirth"/>
+                        </group>
+                        <group>
+                            <field name="class_id"/>
+                            <field name="address"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="city"/>
+                            <field name="zip"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="school_management_tree_view" model="ir.ui.view">
+        <field name="name">school.management.tree.view</field>
+        <field name="model">school.management</field>
+        <field name="arch" type="xml">
+            <tree string="School Management">
+                <field name="name"/>
+                <field name="mail"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_school_management_view" model="ir.actions.act_window">
+        <field name="name">Student</field>
+        <field name="res_model">school.management</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{}</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new.
+            </p>
+        </field>
+    </record>
+    <!--    Finish-->
+    <record id="s_finish_kanban_view" model="ir.ui.view">
+        <field name="name">s.finish.kanban.view</field>
+        <field name="model">s.finish</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban" string="School Management" create="false" delete="false">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="gender"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_content oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>
+                                        <field name="gender"/>
+                                        <field name="phone"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="s_finish_form_view" model="ir.ui.view">
+        <field name="name">s.finish.form.view</field>
+        <field name="model">s.finish</field>
+        <field name="arch" type="xml">
+            <form string="School Management" edit="false" create="false">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_invoices">
+                            <span class="o_stat_value" style="font-weight: 700;">
+                                <field name="total_invoice"/>
+                            </span>
+                            <span class="o_stat_text">Invoiced</span>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="mail"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="dateOfBirth"/>
+                        </group>
+                        <group>
+                            <field name="class_id"/>
+                            <field name="address"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="city"/>
+                            <field name="zip"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="s_finish_tree_view" model="ir.ui.view">
+        <field name="name">s.finish.tree.view</field>
+        <field name="model">s.finish</field>
+        <field name="arch" type="xml">
+            <tree string="School Management" create="false" delete="false">
+                <field name="name"/>
+                <field name="mail"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_s_finish_view" model="ir.actions.act_window">
+        <field name="name">Finish</field>
+        <field name="res_model">s.finish</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{}</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new.
+            </p>
+        </field>
+    </record>
+    <!--    Teacher-->
+    <record id="s_teacher_kanban_view" model="ir.ui.view">
+        <field name="name">s.teacher.kanban.view</field>
+        <field name="model">s.teacher</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban" string="Teacher">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="gender"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_content oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>
+                                        <field name="gender"/>
+                                        <field name="subject"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="s_teacher_form_view" model="ir.ui.view">
+        <field name="name">s.teacher.form.view</field>
+        <field name="model">s.teacher</field>
+        <field name="arch" type="xml">
+            <form string="Teacher">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" class="oe_stat_button" icon="fa-user" name="action_student">
+                            <span class="o_stat_value" style="font-weight: 700;">
+                                <field name="total_student"/>
+                            </span>
+                            <span class="o_stat_text">Student</span>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="mail"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="subject"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="s_teacher_tree_view" model="ir.ui.view">
+        <field name="name">s.teacher.tree.view</field>
+        <field name="model">s.teacher</field>
+        <field name="arch" type="xml">
+            <tree string="Teacher">
+                <field name="name"/>
+                <field name="mail"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_s_teacher_view" model="ir.actions.act_window">
+        <field name="name">Teacher</field>
+        <field name="res_model">s.teacher</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{}</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new.
+            </p>
+        </field>
+    </record>
+
+    <!--Class-->
+    <record id="s_class_kanban_view" model="ir.ui.view">
+        <field name="name">s.class.kanban.view</field>
+        <field name="model">s.class</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban" string="Class">
+                <field name="name"/>
+                <field name="room"/>
+                <field name="capecity"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_content oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>
+                                        <field name="room"/>
+                                        <field name="capecity"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="s_class_form_view" model="ir.ui.view">
+        <field name="name">s.class.form.view</field>
+        <field name="model">s.class</field>
+        <field name="arch" type="xml">
+            <form string="Class">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" class="oe_stat_button" icon="fa-user" name="action_student">
+                            <span class="o_stat_value" style="font-weight: 700;">
+                                <field name="total_student"/>
+                            </span>
+                            <span class="o_stat_text">Student</span>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="teacher_id"/>
+                            <field name="admission_fee"/>
+
+                        </group>
+                        <group>
+                            <field name="room"/>
+                            <field name="capecity"/>
+                            <field name="tuition_fees"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="s_class_tree_view" model="ir.ui.view">
+        <field name="name">s.class.tree.view</field>
+        <field name="model">s.class</field>
+        <field name="arch" type="xml">
+            <tree string="Class">
+                <field name="name"/>
+                <field name="room"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_s_class_view" model="ir.actions.act_window">
+        <field name="name">Class</field>
+        <field name="res_model">s.class</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{}</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Class.
+            </p>
+        </field>
+    </record>
+
+    <!--Online Application-->
+    <record id="s_application_kanban_view" model="ir.ui.view">
+        <field name="name">s.application.kanban.view</field>
+        <field name="model">s.application</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban" string="Application" default_group_by="states">
+                <field name="name"/>
+                <field name="class_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_content oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>
+                                        <field name="class_id"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="s_application_form_view" model="ir.ui.view">
+        <field name="name">s.application.form.view</field>
+        <field name="model">s.application</field>
+        <field name="arch" type="xml">
+            <form string="Application">
+                <header>
+                    <button class="btn-primary" name="action_draft" string="Draft" type="object"
+                            attrs="{'invisible': ['|','|',('states','=','draft'), ('states','=','admission'), ('states','=','assign')]}"/>
+                    <button class="btn-primary" id="button_admission" name="action_admission" string="Admission Test"
+                            type="object"
+                            attrs="{'invisible': ['|', ('states','=','admission'), ('states','=','assign')]}"/>
+                    <button class="btn-primary" name="action_assign" string="Assign Class" type="object"
+                            attrs="{'invisible': [('states','=','assign')]}"/>
+
+<!--                    <button class="btn-primary" name="action_draft" string="Draft" type="object"/>-->
+<!--                    <button class="btn-primary" id="button_admission" name="action_admission" string="Admission Test" type="object"/>-->
+<!--                    <button class="btn-primary" name="action_assign" string="Assign Class" type="object"/>-->
+                    <field name="states" widget="statusbar" statusbar_visible="draft,admission,assign"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_invoices">
+                            <span class="o_stat_value" style="font-weight: 700;">
+                                <field name="total_invoice"/>
+                            </span>
+                            <span class="o_stat_text">Invoiced</span>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <!--<field name="uid"/>-->
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                            <field name="mail"/>
+                        </group>
+                        <group>
+                            <field name="age"/>
+                            <field name="gender"/>
+                        </group>
+                        <group>
+                            <field name="class_id"/>
+                            <field name="dateOfBirth"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="city"/>
+                            <field name="zip"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="s_application_tree_view" model="ir.ui.view">
+        <field name="name">s.application.tree.view</field>
+        <field name="model">s.application</field>
+        <field name="arch" type="xml">
+            <tree string="Application">
+                <field name="name"/>
+                <field name="class_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_s_application_view" model="ir.actions.act_window">
+        <field name="name">Application</field>
+        <field name="res_model">s.application</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{}</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Class.
+            </p>
+        </field>
+    </record>
+
+    <!--    Web Template-->
+    <!--    Application-->
+    <template id="applications">
+        <t t-call="website.layout">
+            <section class="p-5" style="background-color: #eee;">
+                <div class="container">
+                    <div class="s3-m-10 s3-p-8">
+                        <div class="col-xs-12 col-md-offset-1 col-md-10">
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-title">
+                                    <h1 class="s3-fs-xs-3" style="color:#782f40;">Online Application</h1>
+                                </div>
+                                <div class="panel-body">
+                                    <form action="/applications" method="POST">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <span>Please complete all areas:</span>
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                   placeholder="Name" t-att-value="res_partner.name"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mail">E-mail</label>
+                                            <input type="email" class="form-control" id="mail" name="mail"
+                                                   placeholder="E-mail" t-att-value="res_partner.email"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">Phone</label>
+                                            <input type="tel" class="form-control" id="phone" name="phone"
+                                                   placeholder="Phone Number" t-att-value="res_partner.phone"/>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="age">Age</label>
+                                                    <input type="text" class="form-control" id="age" name="age"
+                                                           placeholder="Age"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="gender">Gender</label>
+                                                    <select class="form-control" id="gender" name="gender">
+                                                        <option value="" selected="true">Choose here</option>
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="class_id">Class</label>
+                                                    <select name="class_id" class="form-control" id="class_id">
+                                                        <option value="0" selected="true">Choose here</option>
+                                                        <t t-foreach="class_id" t-as="class_id">
+                                                            <option t-att-value="class_id.id">
+                                                                <t t-out="class_id.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="dateOfBirth">Date Of Birth</label>
+                                                    <input type="date" class="form-control" id="dateOfBirth"
+                                                           name="dateOfBirth" placeholder="Date Of Birth" required="1"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="address">Address</label>
+                                                    <input type="text" class="form-control" id="address" name="address"
+                                                           placeholder="Street Address"
+                                                           t-att-value="res_partner.street"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="city">City</label>
+                                                    <input type="text" class="form-control" id="city" name="city"
+                                                           placeholder="City" t-att-value="res_partner.city"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="state">State</label>
+                                                    <input type="text" class="form-control" id="state" name="state"
+                                                           placeholder="State"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="zip">Zip</label>
+                                                    <input type="number" class="form-control" id="zip" name="zip"
+                                                           placeholder="Zip Code" t-att-value="res_partner.zip"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <button type="submit" class="btn btn-primary s3-gt center-block">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+
+    <!--    Status-->
+    <template id="status_1">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/school_management/static/src/css/web_assets_frontend.css"/>
+            <section class="p-5" style="background-color: #eee;">
+                <div class="container">
+                    <div class="s3-m-10 s3-p-8">
+                        <div class="col-xs-12 col-md-offset-1 col-md-10">
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-title">
+                                    <h1 class="s3-fs-xs-3" style="color:#782f40;">Please Download and Attend the Admission Test</h1>
+                                </div>
+                                <div class="panel-body p-3" id="print_card">
+                                    <section id="my">
+                                        <div style=" background: white; padding: 20px; width: 500px;">
+                                            <table style="border-collapse: collapse; width: 100%;" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 100%; text-align: center; padding-bottom: 10px;"
+                                                            colspan="2">
+                                                            <strong>Our School</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 50%; padding-bottom: 5px;">
+                                                            <strong>Name:</strong>
+                                                            <span><t t-esc="student_id.name"/></span>
+                                                        </td>
+                                                        <td style="width: 50%; padding-bottom: 5px;">
+                                                            <strong>Roll:</strong>
+                                                            <span><t t-esc="student_id.uid"/></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 50%; padding-bottom: 5px;">
+                                                            <strong>Phone:</strong>
+                                                            <span><t t-esc="student_id.phone"/></span>
+                                                        </td>
+                                                        <td style="width: 50%; padding-bottom: 5px;">
+                                                            <strong>Date:</strong>
+                                                            <span><t t-esc="student_id.date"/></span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="p-3">
+                                    <button onclick="print_()" class="p-3 mb-2 bg-primary text-white" style="border: 0;">Print Admit Card</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <script type="text/javascript" src="/school_management/static/src/js/web_assets_frontend.js"></script>
+        </t>
+    </template>
+    <template id="status_2">
+        <t t-call="website.layout">
+            <section class="p-5" style="background-color: #eee;">
+                <div class="container">
+                    <div class="s3-m-10 s3-p-8">
+                        <div class="col-xs-12 col-md-offset-1 col-md-10">
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-title">
+                                    <h1 class="s3-fs-xs-3" style="color:#782f40;">You are admitted in
+                                        <t t-out="class_id"/>
+                                    </h1>
+                                </div>
+                                <div class="panel-body">
+                                    <!--                                    <form action="/status" method="POST">-->
+                                    <!--                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
+                                    <!--                                        <input type="hidden" name="ca" value="1"/>-->
+                                    <!--                                        <button type="submit" class="btn btn-primary s3-gt center-block">Cancel Admission</button>-->
+                                    <!--                                    </form>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+    <template id="status_3">
+        <t t-call="website.layout">
+            <section class="p-5" style="background-color: #eee;">
+                <div class="container">
+                    <div class="s3-m-10 s3-p-8">
+                        <div class="col-xs-12 col-md-offset-1 col-md-10">
+                            <div class="panel panel-default">
+                                <div class="panel-heading panel-title">
+                                    <h1 class="s3-fs-xs-3" style="color:#782f40;">Your Application Is Received</h1>
+                                </div>
+                                <div class="panel-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+    <!--    <template id="signup">-->
+    <!--        <t t-call="website.layout">-->
+    <!--            <section class="p-5" style="background-color: #eee;">-->
+    <!--                <div class="container">-->
+    <!--                    <div class="row d-flex justify-content-center align-items-center h-100">-->
+    <!--                        <div class="col-lg-12 col-xl-11">-->
+    <!--                            <div class="card text-black" style="border-radius: 25px;">-->
+    <!--                                <div class="card-body p-md-5">-->
+    <!--                                    <div class="row justify-content-center">-->
+    <!--                                        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">-->
+
+    <!--                                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>-->
+
+    <!--                                            <form class="mx-1 mx-md-4" action="/signup" method="POST">-->
+    <!--                                                <input type="hidden" name="csrf_token"-->
+    <!--                                                       t-att-value="request.csrf_token()"/>-->
+    <!--                                                <div class="d-flex flex-row align-items-center mb-4">-->
+    <!--                                                    <div class="form-outline flex-fill mb-0">-->
+    <!--                                                        <input type="text" id="name" name="name" class="form-control"/>-->
+    <!--                                                        <label class="form-label" for="name">Your Name</label>-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+    <!--                                                <div class="d-flex flex-row align-items-center mb-4">-->
+    <!--                                                    <div class="form-outline flex-fill mb-0">-->
+    <!--                                                        <input type="email" id="email" name="email"-->
+    <!--                                                               class="form-control"/>-->
+    <!--                                                        <label class="form-label" for="email">Your Email-->
+    <!--                                                        </label>-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+
+    <!--                                                <div class="d-flex flex-row align-items-center mb-4">-->
+    <!--                                                    <div class="form-outline flex-fill mb-0">-->
+    <!--                                                        <input type="password" id="password" name="password"-->
+    <!--                                                               class="form-control"/>-->
+    <!--                                                        <label class="form-label" for="password">Password</label>-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+    <!--                                                <div class="d-flex flex-row align-items-center mb-4">-->
+    <!--                                                    <div class="form-outline flex-fill mb-0">-->
+    <!--                                                        <input type="password" id="repassword" name="repassword"-->
+    <!--                                                               class="form-control"/>-->
+    <!--                                                        <label class="form-label" for="repassword">Repeat your-->
+    <!--                                                            password-->
+    <!--                                                        </label>-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+    <!--                                                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">-->
+    <!--                                                    <button type="submit" class="btn btn-primary btn-lg">Register-->
+    <!--                                                    </button>-->
+    <!--                                                </div>-->
+
+    <!--                                            </form>-->
+
+    <!--                                        </div>-->
+    <!--                                        <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">-->
+
+    <!--                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"-->
+    <!--                                                 class="img-fluid" alt="Sample image"/>-->
+
+    <!--                                        </div>-->
+    <!--                                    </div>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </section>-->
+    <!--        </t>-->
+    <!--    </template>-->
+    <!--    &lt;!&ndash;    Login&ndash;&gt;-->
+    <!--    <template id="login">-->
+    <!--        <t t-call="website.layout">-->
+    <!--            <section class="p-5" style="background-color: #eee;">-->
+    <!--                <div class="container">-->
+    <!--                    <div class="row d-flex justify-content-center align-items-center h-100">-->
+    <!--                        <div class="col-lg-12 col-xl-11">-->
+    <!--                            <div class="card text-black" style="border-radius: 25px;">-->
+    <!--                                <div class="card-body p-md-5">-->
+    <!--                                    <div class="row justify-content-center">-->
+    <!--                                        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">-->
+    <!--                                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Log in</p>-->
+    <!--                                            <form class="mx-1 mx-md-4" action="/web/login" method="POST">-->
+    <!--                                                <input type="hidden" name="csrf_token"-->
+    <!--                                                       t-att-value="request.csrf_token()"/>-->
+    <!--                                                <div class="d-flex flex-row align-items-center mb-4">-->
+    <!--                                                    <div class="form-outline flex-fill mb-0">-->
+    <!--                                                        <input type="text" id="login" name="login" class="form-control"-->
+    <!--                                                               required="required"/>-->
+    <!--                                                        <label class="form-label" for="login">Your Email-->
+    <!--                                                        </label>-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+
+    <!--                                                <div class="d-flex flex-row align-items-center mb-4">-->
+    <!--                                                    <div class="form-outline flex-fill mb-0">-->
+    <!--                                                        <input type="password" id="password" name="password"-->
+    <!--                                                               class="form-control" required="required"/>-->
+    <!--                                                        <label class="form-label" for="password">Password</label>-->
+    <!--                                                    </div>-->
+    <!--                                                </div>-->
+    <!--                                                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">-->
+    <!--                                                    <button type="submit" class="btn btn-primary btn-lg">Log in</button>-->
+    <!--                                                </div>-->
+    <!--                                            </form>-->
+    <!--                                        </div>-->
+    <!--                                        <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">-->
+    <!--                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"-->
+    <!--                                                 class="img-fluid" alt="Sample image"/>-->
+    <!--                                        </div>-->
+    <!--                                    </div>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </section>-->
+    <!--        </t>-->
+    <!--    </template>-->
+
+    <!--    Mail Template-->
+    <data noupdate="1">
+        <record id="mail_template_1" model="mail.template">
+            <field name="name">Admission Test</field>
+            <field name="model_id" ref="school_management.model_s_application"/>
+            <field name="email_from">{{ user.email }}</field>
+            <field name="email_to">{{ object.mail }}</field>
+            <field name="subject">Admission Test Notification</field>
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0"
+                       style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                   style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">
+                                <tbody>
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                   style="background-color: white; padding: 0; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="middle">
+                                                        <span style="font-size: 10px;">Admission Test</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td style="min-width: 590px;">
+                                            Hi <t t-out="object.name or ''"></t>,
+                                            <br/>
+                                            <br/>
+                                            Welcome to Our School.
+                                            <br/>
+                                            You are invited to Admission Test
+                                        </td>
+                                    </tr>
+                                    <!-- FOOTER -->
+                                    <tr>
+                                        <td align="center"
+                                            style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
+                                            <hr width="100%"
+                                                style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </field>
+            <!--            <field name="lang">{{ object.partner_id.lang }}</field>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="mail_template_2" model="mail.template">
+            <field name="name">Admission</field>
+            <field name="model_id" ref="school_management.model_s_application"/>
+            <field name="email_from">{{ user.email }}</field>
+            <field name="email_to">{{ object.mail }}</field>
+            <field name="subject">Class Assign Notification</field>
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0"
+                       style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                   style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">
+                                <tbody>
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                   style="background-color: white; padding: 0; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="middle">
+                                                        <span style="font-size: 10px;">Assign A New Class</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td style="min-width: 590px;">
+                                            Hi <t t-out="object.name or ''"></t>,
+                                            <br/>
+                                            <br/>
+                                            Welcome to Our School.
+                                            <br/>
+                                            Your Class Start Now
+                                        </td>
+                                    </tr>
+                                    <!-- FOOTER -->
+                                    <tr>
+                                        <td align="center"
+                                            style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
+                                            <hr width="100%"
+                                                style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </field>
+            <!--            <field name="lang">{{ object.partner_id.lang }}</field>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+
+    <record id="product_template_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.common.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//sheet//div[3]//span[2]" position="after">
+                <span class="d-inline-block">
+                    <field name="school_ok"/>
+                    <label for="school_ok"/>
+                </span>
+            </xpath>
+        </field>
+    </record>
+</odoo>

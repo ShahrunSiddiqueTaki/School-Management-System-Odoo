@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_category_school">
+        <field name="name">School Management</field>
+        <field name="description">Category For School</field>
+        <field name="sequence">0</field>
+    </record>
+
+
+    <record id="group_school_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_school"/>
+    </record>
+
+    <record id="group_school_head" model="res.groups">
+        <field name="name">Head</field>
+        <field name="category_id" ref="module_category_school"/>
+        <field name="implied_ids" eval="[(4, ref('group_school_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="school_own_document">
+        <field name="name">User Only</field>
+        <field name="model_id" ref="model_school_management"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('group_school_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="school_own_document">
+        <field name="name">User Only</field>
+        <field name="model_id" ref="model_s_application"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('group_school_user'))]"/>
+    </record>
+
+        <record model="ir.rule" id="school_all_document">
+        <field name="name">User Only</field>
+        <field name="model_id" ref="model_school_management"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('group_school_head'))]"/>
+    </record>
+
+    <record model="ir.rule" id="school_all_document">
+        <field name="name">User Only</field>
+        <field name="model_id" ref="model_s_application"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('group_school_head'))]"/>
+    </record>
+</odoo>

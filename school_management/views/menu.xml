@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menu -->
+    <menuitem name="School Management"
+              id="school_management"
+              sequence="0"/>
+    <!-- Top Menu -->
+    <menuitem name="Applicants"
+              id="application"
+              parent="school_management"
+              action="action_s_application_view"
+              sequence="1"/>
+    <menuitem name="Student"
+              id="student"
+              parent="school_management"
+              action="action_school_management_view"
+              sequence="2"/>
+    <menuitem name="Alumni"
+              id="finished"
+              parent="school_management"
+              action="action_s_finish_view"
+              sequence="3"/>
+    <menuitem name="Teacher"
+              id="teacher"
+              parent="school_management"
+              action="action_s_teacher_view"
+              sequence="4"/>
+    <menuitem name="Class"
+              id="class"
+              parent="school_management"
+              action="action_s_class_view"
+              sequence="5"/>
+    <!-- Website -->
+    <record id="web_applications" model="website.menu">
+        <field name="name">Online Application</field>
+        <field name="url">/applications</field>
+        <field name="sequence">12</field>
+        <field name="parent_id" search="[('parent_id', '=', False), ('website_id', '=', 1)]"/>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+    <record id="web_status" model="website.menu">
+        <field name="name">Status</field>
+        <field name="url">/status</field>
+        <field name="sequence">13</field>
+        <field name="parent_id" search="[('parent_id', '=', False), ('website_id', '=', 1)]"/>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+    <!--    <record id="web_signup" model="website.menu">-->
+    <!--        <field name="name">Sign Up</field>-->
+    <!--        <field name="url">/signup</field>-->
+    <!--        <field name="sequence">13</field>-->
+    <!--        <field name="parent_id" search="[('parent_id', '=', False), ('website_id', '=', 1)]"/>-->
+    <!--        <field name="website_id" ref="website.default_website"/>-->
+    <!--    </record>-->
+    <!--    <record id="web_login" model="website.menu">-->
+    <!--        <field name="name">Log In</field>-->
+    <!--        <field name="url">/login</field>-->
+    <!--        <field name="sequence">14</field>-->
+    <!--        <field name="parent_id" search="[('parent_id', '=', False), ('website_id', '=', 1)]"/>-->
+    <!--        <field name="website_id" ref="website.default_website"/>-->
+    <!--    </record>-->
+</odoo>
